@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-@hjo=r08bd!%!n2l4fj3tt2bukqebe@ppe%*n!()b#b8v8yg&t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['homework-messaging-system-f230131a5e8b.herokuapp.com']
 
 
 # Application definition
@@ -77,8 +79,12 @@ WSGI_APPLICATION = 'messagingsystem.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dd6p132emodkdb',
+        'USER': 'obwwbzqycpnljm',
+        'PASSWORD': '75ad0c54176eccbafbf4e62131d303e9a5763408494f2d467ab985f25948eb10',
+        'HOST': 'ec2-34-247-16-250.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -117,7 +123,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
+django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
